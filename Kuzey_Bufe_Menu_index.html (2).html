@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Kuzey Büfe - Tost ve Sandviç Çeşitleri</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #121212;
+            color: #e5e5e5;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+        header {
+            background: linear-gradient(180deg, #000000, #1a1a1a);
+            text-align: center;
+            padding: 35px 20px;
+            border-bottom: 4px solid #f26522;
+        }
+        header h1 {
+            color: #f26522;
+            font-size: 2.8rem; /* Daha büyük başlık */
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        header p {
+            color: #ccc;
+            font-size: 1.3rem; /* Daha büyük alt başlık */
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .phone-btn {
+            display: inline-block;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 2px solid #f26522;
+            font-weight: bold;
+            font-size: 1.1rem; /* Daha büyük telefon butonu */
+            transition: 0.3s;
+        }
+        .phone-btn:hover {
+            background: #f26522;
+        }
+        
+        /* Sabit Kategori Menüsü */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.97);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            padding: 18px 15px;
+            z-index: 1000;
+            border-bottom: 2px solid #2a2a2a;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        @media (min-width: 600px) {
+            nav { justify-content: center; }
+        }
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+        nav a {
+            background: #1e1e1e;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1.1rem; /* Daha büyük kategori yazıları */
+            font-weight: 700;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+        nav a:hover, nav a:focus {
+            background: #f26522;
+            border-color: #f26522;
+        }
+        
+        /* Konteyner ve Kart Yapısı */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        .s {
+            background: #1a1a1a;
+            margin: 30px 0;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.7);
+            scroll-margin-top: 90px;
+        }
+        .s h2 {
+            color: #f26522;
+            border-bottom: 2.5px solid #2a2a2a;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem; /* Daha büyük bölüm başlıkları */
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* Ürün Satırı */
+        .i {
+            padding: 20px 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .i:last-child {
+            border-bottom: none;
+        }
+        .main-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .title {
+            font-size: 1.3rem; /* Daha büyük ürün ismi */
+            font-weight: 700;
+            color: #fff;
+        }
+        .price {
+            color: #fff;
+            font-size: 1.25rem; /* Daha büyük ve net fiyatlar */
+            font-weight: 800;
+            background: #f26522;
+            padding: 6px 14px;
+            border-radius: 10px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(242, 101, 34, 0.3);
+        }
+        .desc {
+            font-size: 1.05rem; /* Daha büyük malzeme açıklaması */
+            color: #b3b3b3;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        .serv {
+            font-size: 0.95rem; /* Daha büyük servis açıklaması */
+            color: #ff8142;
+            margin-top: 6px;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        .footer-note {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            margin: 40px 0 10px 0;
+        }
+        
+        /* WhatsApp Butonu */
+        .w {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #25D366;
+            color: #fff;
+            padding: 16px 26px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+            z-index: 9999;
+            font-size: 1.15rem; /* Daha büyük sipariş butonu */
+        }
+        .w:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>KUZEY BÜFE</h1>
+    <p>Tost ve Sandviç Çeşitleri</p>
+    <a href='tel:+905338312026' class="phone-btn">📞 0533 831 2026</a>
+</header>
+
+<nav>
+    <a href='#t'>🥪 Tostlar</a>
+    <a href='#s'>🥖 Sandviçler</a>
+    <a href='#si'>🥤 Soğuk İçecekler</a>
+    <a href='#sc'>☕ Sıcak İçecekler</a>
+</nav>
+
+<div class="container">
+
+    <!-- TOSTLAR -->
+    <div class='s' id='t'>
+        <h2>🥪 Tostlar</h2>
+        
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kıbrıs Usulü Tost</div>
+                <div class="price">350₺</div>
+            </div>
+            <div class="desc">Hellim, kaşar, bolibif, domates, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Pastırmalı Kıbrıs Usulü Tost</div>
+                <div class="price">400₺</div>
+            </div>
+            <div class="desc">Kıbrıs pastırması, hellim, kaşar, bolibif, domates, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kıbrıs Usulü Tavuklu Tost</div>
+                <div class="price">380₺</div>
+            </div>
+            <div class="desc">Haşlanmış tavuk göğsü, hellim, kaşar, bolibif, domates, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kıbrıs Usulü Full Karışık Tost</div>
+                <div class="price">430₺</div>
+            </div>
+            <div class="desc">Kıbrıs pastırması, haşlanmış tavuk göğsü, hellim, kaşar, bolibif, domates, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Sanayi Tostu</div>
+                <div class="price">300₺</div>
+            </div>
+            <div class="desc">Dana sucuk, kaşar, salça ve isteğe bağlı mayonez. Küçük somun ekmeğinde çıtır servis edilir.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Ayvalık Tostu</div>
+                <div class="price">450₺</div>
+            </div>
+            <div class="desc">Dana sucuk, dana salam, piliç sosis, kaşar, domates, salatalık turşusu, ketçap ve mayonez.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Hellim Kaşar Tost</div>
+                <div class="price">300₺</div>
+            </div>
+            <div class="desc">Küçük somun ekmeğinde çıtır servis edilir.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kaşarlı Tost</div>
+                <div class="price">250₺</div>
+            </div>
+            <div class="desc">Küçük somun ekmeğinde çıtır servis edilir.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+    </div>
+
+    <!-- SANDVİÇLER -->
+    <div class='s' id='s'>
+        <h2>🥖 Sandviçler</h2>
+        
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kıbrıs Usulü Sandviç</div>
+                <div class="price">350₺</div>
+            </div>
+            <div class="desc">Hellim, kaşar, bolibif, domates, salatalık, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Kıbrıs Usulü Tavuklu Sandviç</div>
+                <div class="price">380₺</div>
+            </div>
+            <div class="desc">Haşlanmış tavuk göğsü, hellim, kaşar, bolibif, domates, salatalık, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+        <div class='i'>
+            <div class="main-line">
+                <div class="title">Hellim Kaşar Sandviç</div>
+                <div class="price">330₺</div>
+            </div>
+            <div class="desc">Hellim, kaşar, domates, salatalık, bikla ve mayonez. Çörek ekmek (susamlı) veya sade ekmek seçeneği ile.</div>
+            <div class="serv">Kereviz, salatalık, biber turşusu ve zeytin ile servis edilir.</div>
+        </div>
+
+    </div>
+
+    <!-- SOĞUK İÇECEKLER -->
+    <div class='s' id='si'>
+        <h2>🥤 Soğuk İçecekler</h2>
+        
+        <div class='i'>
+            <div class="main-line"><div class="title">Taze Sıkma Portakal Suyu</div><div class="price">200₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Kutu İçecekler</div><div class="price">80₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Naneli Ayran</div><div class="price">80₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Küçük Ayran</div><div class="price">50₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Garga Suyu</div><div class="price">90₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Beypazarı Soda</div><div class="price">60₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Perrier Soda</div><div class="price">120₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Su</div><div class="price">40₺</div></div>
+        </div>
+
+    </div>
+
+    <!-- SICAK İÇECEKLER -->
+    <div class='s' id='sc'>
+        <h2>☕ Sıcak İçecekler</h2>
+        
+        <div class='i'>
+            <div class="main-line"><div class="title">Küçük Çay</div><div class="price">50₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Büyük Çay</div><div class="price">70₺</div></div>
+        </div>
+        <div class='i'>
+            <div class="main-line"><div class="title">Türk Kahvesi</div><div class="price">80₺</div></div>
+        </div>
+
+    </div>
+    
+    <div class="footer-note">© Kuzey Büfe Dijital Menü</div>
+</div>
+
+<!-- WhatsApp Sipariş Butonu -->
+<a class='w' href='https://wa.me/905338312026' target="_blank">
+    💬 Sipariş Ver
+</a>
+
+</body>
+</html>
